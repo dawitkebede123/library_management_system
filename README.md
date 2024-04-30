@@ -75,7 +75,7 @@ Make sure *Bench* is installed on your machine. If you haven't installed Bench, 
 |----------|---------|
 | /api/method/library_management.api.api_book.get_books/ | return all members |
 
-| /api/method/library_management.api.api_book.get_book/ | return a single book 
+| /api/method/library_management.api.api_book.get_book/ | return a single book |
 
 | /api/method/library_management.api.api_book.create_book/  | create new book 
 
