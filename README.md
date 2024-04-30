@@ -72,37 +72,37 @@ Make sure *Bench* is installed on your machine. If you haven't installed Bench, 
 
 ### Custom API 
 | Endpoint | Purpose |
-
+|------|-----------|
 | /api/method/library_management.api.api_book.get_books | return all members |
 
 | /api/method/library_management.api.api_book.get_book | return a single book |
 
-| /api/method/library_management.api.api_book.create_book | create new book 
+| /api/method/library_management.api.api_book.create_book | create new book |
 
-| api/method/library_management.api.api_book.update_book/ | update book record 
+| api/method/library_management.api.api_book.update_book/ | update book record |
 
-| api/method/library_management.api.api_book.delete_book/ | delete book 
-| api/method/library_management.api.api_member.get_members/ |  return all members 
+| api/method/library_management.api.api_book.delete_book/ | delete book |
+| api/method/library_management.api.api_member.get_members/ |  return all members |
 
-| api/method/library_management.api.api_member.get_member/  | return a single member 
+| api/method/library_management.api.api_member.get_member/  | return a single member |
 
-| api/method/library_management.api.api_member.create_member/ | create new member 
+| api/method/library_management.api.api_member.create_member/ | create new member |
 
-| api/method/library_management.api.api_member.update_member/ | update member record 
+| api/method/library_management.api.api_member.update_member/ | update member record |
 
-| api/method/library_management.api.api_member.delete_member/ | delete member 
+| api/method/library_management.api.api_member.delete_member/ | delete member |
 
-| api/method/library_management.api.api_loan.get_loans/  | return all loan records 
+| api/method/library_management.api.api_loan.get_loans/  | return all loan records |
 
-| api/method/library_management.api.api_loan.get_loan_By_Book/  | return a loan record of book 
+| api/method/library_management.api.api_loan.get_loan_By_Book/  | return a loan |record of book 
 
-| api/method/library_management.api.api_loan.get_loan_By_member/ |  return a loan record of a member 
+| api/method/library_management.api.api_loan.get_loan_By_member/ |  return a loan |record of a member 
 
-| api/method/library_management.api.api_loan.create_loan/ | create new loan 
+| api/method/library_management.api.api_loan.create_loan/ | create new loan |
 
-| api/method/library_management.api.api_loan.update_loan/ | update loan record 
+| api/method/library_management.api.api_loan.update_loan/ | update loan record |
 
-| api/method/library_management.api.api_loan.delete_loan/ | delete loan 
+| api/method/library_management.api.api_loan.delete_loan/ | delete loan |
 ### License
 
 mit
