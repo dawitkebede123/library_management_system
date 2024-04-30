@@ -72,7 +72,7 @@ Make sure *Bench* is installed on your machine. If you haven't installed Bench, 
 
 ### book manamgement 
 
-api/method/library_management.api.api_book.get_books/            return all members
+api/method/library_management.api.api_book.get_books/ | return all members
 
 api/method/library_management.api.api_book.get_book/             return a single book
 
