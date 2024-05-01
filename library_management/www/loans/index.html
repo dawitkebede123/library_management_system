@@ -3,11 +3,11 @@
 {% block content %}
   <div class="container d-flex flex-column">
     <h2 class="mt-6">Loans</h2>
-    <div class="container text-left">
+    <div class="container text-right">
       <button type="button" id="addButton" class="btn btn-primary" data-toggle="modal" data-target="#formModal" onclick="initModal();">Add Loan</button>
     </div>
     <ul class="list-unstyled px-6" id="loanList">
-      {% if loans %}
+
       {% for loan in loans %}
         <li>
           <div class="row p-3 m-3">
@@ -29,11 +29,7 @@
           </div>
         </li>
       {% endfor %}
-      {% else %}
-        <div class="text-center text-secondary p-5">
-          No loans yet.<br/>Click Add Loan to add one.
-        </div>
-      {% endif %}
+    
     </ul>
   </div>
   <!-- The form Modal -->
@@ -51,7 +47,7 @@
             <div class="form-group">
               <label for="title" class="required">Book</label>
 
-              <select id="bookSelect" name="selectedBook">
+              <select id="book" name="selectedBook">
                 {% for book in books %}
                   <option value="{{ title }}">{{ book.title }}</option>
                 {% endfor %}
@@ -61,7 +57,7 @@
             </div>
             <div class="form-group">
               <label for="author" class="required">Member Name</label>
-              <select id="bookSelect" name="selectedBook">
+              <select id="member" name="selectedBook">
                 {% for member in members %}
                   <option value="{{ title }}">{{ member.name }}</option>
                 {% endfor %}
@@ -87,7 +83,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="submitButton">Save</button>
+          <button type="button" class="btn btn-primary" id="submitButton" onclick="create_loan()">Save</button>
         </div>
       </div>
     </div>
@@ -107,7 +103,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger" onclick="deleteDoc()">Delete</button>
+          <button type="button" class="btn btn-danger" onclick="deleteLoan()">Delete</button>
         </div>
       </div>
     </div>

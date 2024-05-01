@@ -33,7 +33,7 @@
   },
   {
    "fieldname": "phone_number",
-   "fieldtype": "Phone",
+   "fieldtype": "Data",
    "label": "Phone Number"
   },
   {
@@ -43,7 +43,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-04-29 15:43:34.827139",
+ "modified": "2024-05-01 18:49:07.495055",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Member",
@@ -70,6 +70,7 @@
    "read": 1,
    "report": 1,
    "role": "Admin",
+   "select": 1,
    "share": 1,
    "write": 1
   },

@@ -21,32 +21,30 @@ def get_members():
 
 @frappe.whitelist()
 def create_member(member_data):
-    '''
-    Create a new Member document with the provided data.
+ 
 
-    This method only accepts authenticated requests.
+  # authentication
+  if frappe.session.user == 'Guest':
+      frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
-    Parameters:
-    - member_data: A dictionary containing data for the new member, including 'first_name',
-      'last_name', 'membership_id', 'email', 'phone_number', and 'image'.
+  # Convert book_data to dictionary if string type
+  member_data = json.loads(member_data) if type(member_data) is str else member_data
 
-    Returns:
-    The name of the newly created Member document.
-    '''
-    # Authenticate request
-    if frappe.session.user == 'Guest':
-        frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
+  # Create the Book document with allowed attributes
+  new_doc = frappe.get_doc({
+      "doctype": "Member",
+      "name": member_data.get("name"),
+      "membership_id": member_data.get("membership_id"),
+      "email": member_data.get("email"),
+      "phone_number": member_data.get("phone_number"),
+  })
 
-    # Create the Book document without explicit validation
-    new_doc = {'doctype': 'Member'}
-    member_data = json.loads(member_data) if type(member_data) is str else member_data # If member_data is a string, convert to dict
-    for attribute, value in member_data.items():
-        if attribute in ['name', 'membership_id', 'email', 'phone_number']:
-            new_doc[attribute] = value
-    doc = frappe.get_doc(new_doc)
-    # Save the document, Frappe will handle validation
-    doc.insert()
-    return doc.name
+  # Validate and save the document
+  new_doc.validate()  # Enforces Frappe validations
+  new_doc.save()
+
+  return new_doc.name
+
 
 @frappe.whitelist()
 def get_member(member_name):

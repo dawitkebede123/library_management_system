@@ -7,6 +7,6 @@ def get_context(context):
     user_roles = frappe.get_roles()
 
     # Set context for current user
-    context.members = frappe.get_list('Member', fields=['name', 'membership_id', 'email', 'phone_number', 'image'])
+    context.members = frappe.get_list('Member', fields=['name', 'membership_id', 'email', 'phone_number'])
     context.user = current_user
-    context.is_librarian = 'Librarian' in user_roles
+    

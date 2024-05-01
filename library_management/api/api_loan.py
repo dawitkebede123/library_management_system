@@ -19,6 +19,7 @@ def get_loans():
 
     return frappe.get_all('Loan', fields=['book', 'member', 'loan_date', 'return_date'])
 
+
 @frappe.whitelist()
 def create_loan(loan_data):
     '''
@@ -35,18 +36,25 @@ def create_loan(loan_data):
     '''
     # Authenticate request
     if frappe.session.user == 'Guest':
-        frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
+      frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
-    # Create the Loan document without explicit validation
-    new_doc = {'doctype': 'Loan'}
-    loan_data = json.loads(loan_data) if type(loan_data) is str else loan_data # If loan_data is string, convert to dict
-    for attribute, value in loan_data.items():
-        if attribute in ['book', 'member', 'loan_date', 'return_date']:
-            new_doc[attribute] = value
-    doc = frappe.get_doc(new_doc)
-    # Save the document, Frappe will handle validation
-    doc.insert()
-    return doc.name
+  # Convert book_data to dictionary if string type
+    loan_data = json.loads(loan_data) if type(loan_data) is str else loan_data
+
+  # Create the Book document with allowed attributes
+    new_doc = frappe.get_doc({
+      "doctype": "Loan",
+      "member": loan_data.get("member"),
+      "book": loan_data.get("book"),
+      "loan_date": loan_data.get("loan_date"),
+      "return_date": loan_data.get("return_date"),
+  })
+
+  # Validate and save the document
+    new_doc.validate()  # Enforces Frappe validations
+    new_doc.save()
+
+    return new_doc.name
 
 @frappe.whitelist()
 def get_loan_By_Book(book=None):
