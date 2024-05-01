@@ -54,7 +54,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-04-30 02:47:31.688609",
+ "modified": "2024-05-01 12:01:16.343122",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Book",
@@ -107,6 +107,7 @@
    "share": 1
   }
  ],
+ "route": "book",
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": []
