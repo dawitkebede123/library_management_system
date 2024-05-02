@@ -1,6 +1,59 @@
 {% extends "templates/pages/base.html" %}
 {% block content %}
-  <a href="./books/index.html">Book</a>
-  <a href="./loans/index.html">Loan</a>
-  <a href="./members/index.html">member</a>
+<style>
+  .container{
+    display: grid; 
+     grid-template-columns: repeat(3,1fr);
+     grid-gap: 30px;
+  }
+  .gredient{
+      background-image: linear-gradient(to right, #57d48b, #20423f);
+      color: transparent;
+      background-clip:text;
+    } 
+   .card-title{
+     color: #ffffff;
+     text-decoration: double;
+   }
+   .card{
+    background-color: #23c0b3;
+   }
+   img{
+    height: 250px;
+   }
+  h1{
+ margin: 20px;
+  }
+  
+</style>
+<h1 class="gredient">Library Management System</h1>
+
+<div class="container">
+  
+  <div class="card mb-3">
+    <img src="https://t3.ftcdn.net/jpg/06/50/58/74/360_F_650587488_x0CidHezOrliOZOiwYDxxwGH7ZZMTX1B.jpg" class="card-img-top" alt="Card image cap">
+    <div class="card-body">
+      
+      <a href="./books/index.html"><h3 class="card-title ">Manage Books</h3></a>
+    </div>
+  </div>
+  <div class="card mb-3">
+    <img  src="https://www.worcestershire.gov.uk/sites/default/files/styles/homepage_carousel_mobile/public/2023-02/Libraries%20YP%20Homework%20Schools.jpg?h=d07d10a6&itok=BlUbVoUt" class="card-img-top" alt="Card image cap">
+    <div class="card-body">
+      <a href="./members/index.html"><h3 class="card-title">Manage Members</h3></a>
+    </div>
+  </div>
+  <div class="card mb-3">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl5bM74Jy_D3qk4YwafTa-YtT0ET6D-gv5cPsAYyWr&s" class="card-img-top" alt="Card image cap">
+    <div class="card-body">
+      
+      <a href="./loans/index.html"><h3 class="card-title">Manage Loans</h3></a>
+    </div>
+  </div>
+ 
+    
+</div>
+<div class="container text-right">
+  <a href="./report.html"><h3 style="color: #23c0b3;">See Reports</h3></a>
+  </div>
 {% endblock %}

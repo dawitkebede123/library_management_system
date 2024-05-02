@@ -51,7 +51,7 @@ def create_loan(loan_data):
   })
 
   # Validate and save the document
-    new_doc.validate()  # Enforces Frappe validations
+    # new_doc.validate()  # Enforces Frappe validations
     new_doc.save()
 
     return new_doc.name
@@ -147,7 +147,7 @@ def update_loan(loan_name, update_data):
     return doc.name
 
 @frappe.whitelist()
-def delete_loan(loan_name):
+def delete_loan(name):
     '''
     Delete a specific Loan.
 
@@ -160,4 +160,4 @@ def delete_loan(loan_name):
     if frappe.session.user == 'Guest':
         frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
-    frappe.delete_doc('Loan', loan_name)
+    frappe.delete_doc('Loan', name)

@@ -1,54 +1,54 @@
 // Function to initialize the form modal by optionally populating the form fields with book details
-function initModal(docName='') {
-  if (docName) {
-    // Load document to be updated
-    frappe.call({
-      method: 'frappe.client.get',
-      args: {
-        doctype: 'Member',
-        name: docName
-      },
-      callback: function(response) {
-        if (response.message) {
-          const member = response.message;
+// function initModal(docName='') {
+//   if (docName) {
+//     // Load document to be updated
+//     frappe.call({
+//       method: 'frappe.client.get',
+//       args: {
+//         doctype: 'Member',
+//         name: docName
+//       },
+//       callback: function(response) {
+//         if (response.message) {
+//           const member = response.message;
         
-          document.getElementById("formModalLabel").innerText = "Update Member";
-          const submitButton = document.getElementById("submitButton");
-          submitButton.innerText = "Update Member";
-          submitButton.onclick = updateDoc;
+//           document.getElementById("formModalLabel").innerText = "Update Member";
+//           const submitButton = document.getElementById("submitButton");
+//           submitButton.innerText = "Update Member";
+//           submitButton.onclick = updateDoc;
 
-          // Populate the form fields with member details
-          document.getElementById("docName").value = member.name;
-          document.getElementById("firstName").value = member.first_name;
-          document.getElementById("lastName").value = member.last_name;
-          document.getElementById("membershipID").value = member.membership_id;
-          document.getElementById("email").value = member.email;
-          document.getElementById("phoneNumber").value = member.phone_number;
+//           // Populate the form fields with member details
+//           document.getElementById("docName").value = member.name;
+//           document.getElementById("firstName").value = member.first_name;
+//           document.getElementById("lastName").value = member.last_name;
+//           document.getElementById("membershipID").value = member.membership_id;
+//           document.getElementById("email").value = member.email;
+//           document.getElementById("phoneNumber").value = member.phone_number;
 
-        } else {
-          console.error('Member not found');
-        }
-      },
-      error: function(err) {
-        console.error(err);
-      }
-    });
-  } else {
-    // Display an empty form for adding a new document
-    document.getElementById("formModalLabel").innerText = "Add a new Member";
-    const submitButton = document.getElementById("submitButton");
-    submitButton.innerText = "Add Member";
-    submitButton.onclick = addDoc;
+//         } else {
+//           console.error('Member not found');
+//         }
+//       },
+//       error: function(err) {
+//         console.error(err);
+//       }
+//     });
+//   } else {
+//     // Display an empty form for adding a new document
+//     document.getElementById("formModalLabel").innerText = "Add a new Member";
+//     const submitButton = document.getElementById("submitButton");
+//     submitButton.innerText = "Add Member";
+//     // submitButton.onclick = addDoc;
 
-    // Reset the form fields in case they have been populated from a previous update command
-    document.getElementById("docName").value = '';
-    document.getElementById("firstName").value = '';
-    document.getElementById("lastName").value = '';
-    document.getElementById("membershipID").value = '';
-    document.getElementById("email").value = '';
-    document.getElementById("phoneNumber").value = '';
-  }
-}
+//     // Reset the form fields in case they have been populated from a previous update command
+//     document.getElementById("docName").value = '';
+//     document.getElementById("firstName").value = '';
+//     document.getElementById("lastName").value = '';
+//     document.getElementById("membershipID").value = '';
+//     document.getElementById("email").value = '';
+//     document.getElementById("phoneNumber").value = '';
+//   }
+// }
 
 function create_member() {
   const name = document.getElementById('name').value;
@@ -66,27 +66,24 @@ function create_member() {
 
   frappe.call({
     method: 'library_management.api.api_member.create_member',
-    args:{member_data:memberData,
-    
+    args:{
+      member_data:memberData,  
   },
     callback: (response) => {
+      window.location.reload(true);
       console.log('Document Added successfully:', response);
-      // Optional: Display success message to user (e.g., modal dialog)
-      // You can potentially avoid reloading the entire page 
-      // by fetching and displaying updated data if needed
     },
     error: (error) => {
       console.error('Error adding book:', error);
-      // Handle errors appropriately (e.g., display user-friendly message)
     }
   });
 }
 
 // Function to delete a doc
-function deleteDoc() {
+function deleteMember() {
   const docName = document.getElementById("docName").value;
   frappe.call({
-    method: 'library_management.api.member_api.delete_member',
+    method: 'library_management.api.api_member.delete_member',
     args: {
       member_name: docName,
     },
@@ -101,32 +98,32 @@ function deleteDoc() {
 }
 
 // Function to update the document
-function updateDoc() {
-  if (validateForm()) {
-    const docName = document.getElementById("docName").value;
-    const docData = {};
+// function updateDoc() {
+//   if (validateForm()) {
+//     const docName = document.getElementById("docName").value;
+//     const docData = {};
     
-    // Prepare update data to be sent as payload in PUT request
-    docData['first_name'] = document.getElementById('firstName').value;
-    docData['last_name'] = document.getElementById('lastName').value;
-    docData['membership_id'] = document.getElementById('membershipID').value;
-    docData['email'] = document.getElementById('email').value;
-    docData['phone_number'] = document.getElementById('phoneNumber').value;
+//     // Prepare update data to be sent as payload in PUT request
+//     docData['first_name'] = document.getElementById('firstName').value;
+//     docData['last_name'] = document.getElementById('lastName').value;
+//     docData['membership_id'] = document.getElementById('membershipID').value;
+//     docData['email'] = document.getElementById('email').value;
+//     docData['phone_number'] = document.getElementById('phoneNumber').value;
   
-    // if a file has been selected, upload it and then update the doc
-    const file = document.getElementById('image').files[0];
-    if (file) {
-      docData['image'] = '/files/' + file.name;
-      uploadFile(file)
-        .then(() => {
-          updateDocInBackend(docName, docData);
-        })
-        .catch(e => console.error(e));
-    } else {
-      updateDocInBackend(docName, docData);
-    }
-  }
-}
+//     // if a file has been selected, upload it and then update the doc
+//     const file = document.getElementById('image').files[0];
+//     if (file) {
+//       docData['image'] = '/files/' + file.name;
+//       uploadFile(file)
+//         .then(() => {
+//           updateDocInBackend(docName, docData);
+//         })
+//         .catch(e => console.error(e));
+//     } else {
+//       updateDocInBackend(docName, docData);
+//     }
+//   }
+// }
 
 // // Function to upload a file to the Frappe backend
 // function uploadFile(file) {

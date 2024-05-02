@@ -5,20 +5,13 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "name1",
+  "member_name",
   "membership_id",
   "column_break_dnjv",
   "email",
   "phone_number"
  ],
  "fields": [
-  {
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Name",
-   "reqd": 1
-  },
   {
    "fieldname": "membership_id",
    "fieldtype": "Data",
@@ -33,17 +26,24 @@
   },
   {
    "fieldname": "phone_number",
-   "fieldtype": "Data",
+   "fieldtype": "Phone",
    "label": "Phone Number"
   },
   {
    "fieldname": "column_break_dnjv",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Member Name",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-01 18:49:07.495055",
+ "modified": "2024-05-02 03:44:05.242581",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Member",

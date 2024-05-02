@@ -19,7 +19,38 @@ def get_books():
 
     return frappe.get_all('Book', fields=['name', 'title', 'author', 'publish_date', 'isbn', 'available',])
 
+@frappe.whitelist()
+def get_single_book(name=None):
+  """
+  This function retrieves a single book based on the provided book name.
 
+  Args:
+      member (str, optional): Name of the member (linked DocType field). Defaults to None.
+      book (str, optional): Name of the book (linked DocType field). Defaults to None.
+
+  Returns:
+      dict or None: A dictionary containing the loan details if found, otherwise None.
+  """
+
+  if  not name:
+    # Raise an exception if neither member nor book is provided
+    raise ValueError("book name must be provided.")
+
+  try:
+    # Attempt to get the loan using `frappe.get_doc`
+    book = frappe.get_doc("Book", {"name":name}).as_dict()
+  except frappe.DoesNotExistError:
+    # Handle case where no loan is found
+    return None
+  else:
+    # Return the loan details as a dictionary
+    return {
+        'title': book['title'],
+        'author': book['author'],
+        'publish_date': book['publish_date'],
+        'isbn': book['isbn'],
+    }
+  
 @frappe.whitelist()
 def create_book(book_data):
   """

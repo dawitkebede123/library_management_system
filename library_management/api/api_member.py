@@ -20,6 +20,29 @@ def get_members():
     return frappe.get_all('Member', fields=['name', 'membership_id', 'email', 'phone_number'])
 
 @frappe.whitelist()
+def get_single_member(name=None):
+
+  if  not name:
+    # Raise an exception if neither member nor book is provided
+    raise ValueError("member name must be provided.")
+
+  try:
+    # Attempt to get the loan using `frappe.get_doc`
+    member = frappe.get_doc("Member", {"member_name":name}).as_dict()
+  except frappe.DoesNotExistError:
+    # Handle case where no loan is found
+    return None
+  else:
+    # Return the loan details as a dictionary
+    return {
+        'name': member['member_name'],
+        'membership_id': member['membership_id'],
+        'email': member['email'],
+        'phone_number': member['phone_number'],
+    }
+  
+
+@frappe.whitelist()
 def create_member(member_data):
  
 
@@ -30,10 +53,10 @@ def create_member(member_data):
   # Convert book_data to dictionary if string type
   member_data = json.loads(member_data) if type(member_data) is str else member_data
 
-  # Create the Book document with allowed attributes
+  # Create the member document with allowed attributes
   new_doc = frappe.get_doc({
       "doctype": "Member",
-      "name": member_data.get("name"),
+      "member_name": member_data.get("name"),
       "membership_id": member_data.get("membership_id"),
       "email": member_data.get("email"),
       "phone_number": member_data.get("phone_number"),
@@ -43,7 +66,7 @@ def create_member(member_data):
   new_doc.validate()  # Enforces Frappe validations
   new_doc.save()
 
-  return new_doc.name
+  return True
 
 
 @frappe.whitelist()

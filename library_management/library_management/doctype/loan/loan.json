@@ -1,32 +1,25 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-04-28 17:54:16.901987",
+ "creation": "2024-05-02 03:52:30.677430",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "member",
   "book",
-  "column_break_ugxf",
   "loan_date",
   "return_date"
  ],
  "fields": [
   {
    "fieldname": "member",
-   "fieldtype": "Link",
-   "label": "Member",
-   "options": "Member"
+   "fieldtype": "Data",
+   "label": "Member"
   },
   {
    "fieldname": "book",
-   "fieldtype": "Link",
-   "label": "Book",
-   "options": "Book"
-  },
-  {
-   "fieldname": "column_break_ugxf",
-   "fieldtype": "Column Break"
+   "fieldtype": "Data",
+   "label": "Book"
   },
   {
    "fieldname": "loan_date",
@@ -41,7 +34,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-01 18:38:16.271234",
+ "modified": "2024-05-02 03:55:01.811470",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Loan",
@@ -58,42 +51,6 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Admin",
-   "select": 1,
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "librarian",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "email": 1,
-   "export": 1,
-   "if_owner": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "member",
-   "share": 1
   }
  ],
  "sort_field": "creation",

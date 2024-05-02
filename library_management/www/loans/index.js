@@ -6,55 +6,57 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Function to initialize the form modal by optionally populating the form fields with loan details
-// function initModal(docName='') {
-//   if (docName) {
-//     // Load document to be updated
-//     frappe.call({
-//       method: 'frappe.client.get',
-//       args: {
-//         doctype: 'loan',
-//         name: docName
-//       },
-//       callback: function(response) {
-//         if (response.message) {
-//           const book = response.message;
+function initModal(docName='') {
+  if (docName) {
+    // Load document to be updated
+    frappe.call({
+      method: 'frappe.client.get',
+      args: {
+        doctype: 'loan',
+        name: docName
+      },
+      callback: function(response) {
+        if (response.message) {
+          const book = response.message;
         
-//           document.getElementById("formModalLabel").innerText = "Update Loan";
-//           const submitButton = document.getElementById("submitButton");
-//           submitButton.innerText = "Update Loan";
-//           submitButton.onclick = updateDoc;
+          document.getElementById("formModalLabel").innerText = "Update Loan";
+          const submitButton = document.getElementById("submitButton");
+          submitButton.innerText = "Update Loan";
+          submitButton.onclick = updateDoc;
 
-//           // Populate the form fields with loan details
+          // Populate the form fields with loan details
         
-//           document.getElementById("member").value = loan.member;
-//           document.getElementById("book").value = loan.book;
-//           document.getElementById("loan_date").value = loan.loan_date;
-//           document.getElementById("return_date").value = loan.return_date;
+          document.getElementById("member").value = loan.member;
+          document.getElementById("book").value = loan.book;
+          document.getElementById("loan_date").value = loan.loan_date;
+          document.getElementById("return_date").value = loan.return_date;
          
 
-//         } else {
-//           console.error('Loan not found');
-//         }
-//       },
-//       error: function(err) {
-//         console.error(err);
-//       }
-//     });
-//   } else {
-//     // Display an empty form for adding a new document
-//     document.getElementById("formModalLabel").innerText = "Add a new Loan";
-//     const submitButton = document.getElementById("submitButton");
-//     submitButton.innerText = "Add Loan";
-//     submitButton.onclick = addDoc;
+        } else {
+          console.error('Loan not found');
+        }
+      },
+      error: function(err) {
+        console.error(err);
+      }
+    });
+  } else {
+  }
 
-//     // Reset the form fields in case they have been populated from a previous update command
+    // Display an empty form for adding a new document
+    // document.getElementById("formModalLabel").innerText = "Add a new Loan";
+    // const submitButton = document.getElementById("submitButton");
+    // submitButton.innerText = "Add Loan";
+    // submitButton.onclick = create_loan();
 
-//           document.getElementById("member").value = '';
-//           document.getElementById("book").value = ''
-//           document.getElementById("loan_date").value =''
-//           document.getElementById("return_date").value = ''
-//   }
-// }
+    // Reset the form fields in case they have been populated from a previous update command
+
+  //         document.getElementById("member").value = '';
+  //         document.getElementById("book").value = ''
+  //         document.getElementById("loan_date").value =''
+  //         document.getElementById("return_date").value = ''
+  // }
+}
 
 // Function to add a doc
 function create_loan() {
@@ -77,13 +79,14 @@ function create_loan() {
     
   },
     callback: (response) => {
+      window.location.reload(true);
       console.log('Document Added successfully:', response);
       // Optional: Display success message to user (e.g., modal dialog)
       // You can potentially avoid reloading the entire page 
       // by fetching and displaying updated data if needed
     },
     error: (error) => {
-      console.error('Error adding book:', error);
+      console.error('Error adding loan:', error);
       // Handle errors appropriately (e.g., display user-friendly message)
     }
   });
@@ -94,7 +97,7 @@ function deleteLoan() {
   frappe.call({
     method: 'library_management.api.api_loan.delete_loan',
     args: {
-      loan_name: docName,
+      name: docName,
     },
     callback: () => {
       console.log('Document deleted successfully');
@@ -121,18 +124,7 @@ function updateDoc() {
     if (isbn) docData['isbn'] = isbn;
     docData['status'] = document.getElementById('status').value;
   
-    // if a file has been selected, upload it and then update the doc
-    const file = document.getElementById('image').files[0];
-    if (file) {
-      docData['image'] = '/files/' + file.name;
-      uploadFile(file)
-        .then(() => {
-          updateDocInBackend(docName, docData);
-        })
-        .catch(e => console.error(e));
-    } else {
-      updateDocInBackend(docName, docData);
-    }
+ 
   }
 }
 

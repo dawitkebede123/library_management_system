@@ -1,70 +1,41 @@
-// Function to initialize the form modal by optionally populating the form fields with book details
-// function initModal(docName='') {
-//   if (docName) {
-//     // Load document to be updated
-//     frappe.call({
-//       method: 'frappe.client.get',
-//       args: {
-//         doctype: 'Book',
-//         name: docName
-//       },
-//       callback: function(response) {
-//         if (response.message) {
-//           const book = response.message;
-        
-//           document.getElementById("formModalLabel").innerText = "Update Book";
-//           const submitButton = document.getElementById("submitButton");
-//           submitButton.innerText = "Update Book";
-//           submitButton.onclick = updateDoc;
+function initModal(docName='') {
+  if (docName) {
+    // Load document to be updated
+    frappe.call({
+      method: 'frappe.client.get',
+      args: {
+        doctype: 'Book',
+        name: docName
+      },
+      callback: function(response) {
+        if (response.message) {
+          const book = response.message;
+          console.log(book.title)
+          document.getElementById("formModalLabel").innerText = "Update Book";
+          const submitButton = document.getElementById("submitButton");
+          submitButton.innerText = "Update Book";
+          submitButton.onclick = updateDoc;
 
-//           // Populate the form fields with book details
-//           document.getElementById("docName").value = book.name;
-//           document.getElementById("title").value = book.title;
-//           document.getElementById("author").value = book.author;
-//           document.getElementById("isbn").value = book.isbn;
-//           document.getElementById("publication_date").value = book.publication_year;
-//           document.getElementById("available").value = book.status;
+          // Populate the form fields with book details
+          document.getElementById("docName").value = book.name;
+          document.getElementById("title").value = book.title;
+          document.getElementById("author").value = book.author;
+          document.getElementById("isbn").value = book.isbn;
+          document.getElementById("publication_date").value = book.publication_year;
+          document.getElementById("available").value = book.status;
 
-//         } else {
-//           console.error('Book not found');
-//         }
-//       },
-//       error: function(err) {
-//         console.error(err);
-//       }
-//     });
-//   } else {
-//     // Display an empty form for adding a new document
-//     document.getElementById("formModalLabel").innerText = "Add a new Book";
-//     const submitButton = document.getElementById("submitButton");
-//     submitButton.innerText = "Add Book";
-//     submitButton.onclick = addDoc;
-
-//     // Reset the form fields in case they have been populated from a previous update command
-//     document.getElementById("docName").value = '';
-//     document.getElementById("title").value = '';
-//     document.getElementById("author").value = '';
-//     document.getElementById("isbn").value = '';
-//     document.getElementById("publication_date").value = '';
-//     document.getElementById("available").value = '';
-//   }
-// }
-
-// Function to add a doc
- // if (validateForm()) {
-  //   const docData = {};
-
-  //   // Prepare data to be sent as payload in post request
-  //   docData['title'] = document.getElementById('title').value;
-  //   docData['author'] = document.getElementById('author').value;
-  //   docData['publish_date'] = document.getElementById('publish_date').value;
-  //   const isbn = document.getElementById('isbn').value;
-  //   if (isbn) docData['isbn'] = isbn;
-  //   docData['available'] = document.getElementById('available').value;
-
-   
-  // }
-  // const docName = document.getElementById("docName").value;
+        } else {
+          console.error('Book not found');
+        }
+      },
+      error: function(err) {
+        console.error(err);
+      }
+    });
+  } else {
+    // addDoc()
+  }
+}
   function addDoc() {
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
@@ -87,6 +58,7 @@
       
     },
       callback: (response) => {
+        window.location.reload(true);
         console.log('Document Added successfully:', response);
         // Optional: Display success message to user (e.g., modal dialog)
         // You can potentially avoid reloading the entire page 
@@ -110,6 +82,21 @@ function deleteDoc() {
     },
     callback: () => {
       console.log('Document deleted successfully');
+      window.location.reload(true);
+    },
+    error: (r) => {
+      console.error(r);
+    }
+  })
+}
+function updateDoc(title, bookData) {
+  frappe.call({
+    method: 'library_management.api.api_book.update_book',
+    args: {
+      title: title,
+      update_data: bookData
+    },
+    callback: (r) => {
       window.location.reload(true);
     },
     error: (r) => {

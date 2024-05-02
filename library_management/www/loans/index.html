@@ -1,37 +1,40 @@
 {% extends "templates/pages/base.html" %}
 
 {% block content %}
-  <div class="container d-flex flex-column">
-    <h2 class="mt-6">Loans</h2>
-    <div class="container text-right">
-      <button type="button" id="addButton" class="btn btn-primary" data-toggle="modal" data-target="#formModal" onclick="initModal();">Add Loan</button>
-    </div>
-    <ul class="list-unstyled px-6" id="loanList">
-
-      {% for loan in loans %}
-        <li>
-          <div class="row p-3 m-3">
-            <div class="col px-2">
-              <h4 class="mt-2 mb-0">{{ loan.book}}</h4>
-              
-              <div class="mt-2">
-                <div><strong>Loaned to: </strong>{{ loan.member }}</div>
-                <div><strong>Loan Date: </strong>{{ loan.loan_date }}</div>
-                <div><strong>Return Date: </strong>{{ loan.return_date }}</div>
-              </div>
-              
-              <div class="mt-2">
-                  <button type="button" class="btn btn-primary editBtn" data-toggle="modal" data-target="#formModal" onclick="initModal('{{ loan.member }}')">Update</button>
-                  <button type="button" class="btn btn-danger editBtn" data-toggle="modal" data-target="#deleteModal" onclick="(() => document.getElementById('docName').value = '{{ loan.book}}')()">Delete</button>
-              </div>
-             
-            </div>
-          </div>
-        </li>
-      {% endfor %}
-    
-    </ul>
+<div class="container d-flex flex-column">
+  <h2 class="mt-6">Loans</h2>
+  <div class="container text-left">
+    <button type="button" id="addButton" class="btn btn-success" data-toggle="modal" data-target="#formModal" onclick="initModal()">Add Loan</button>
   </div>
+  <div class="container text-right">
+    <a href="../me.html" class="btn btn-info">Back to Home</a>
+  </div>
+  
+  
+  <table class="table">
+    <tr>
+      <th>Member name</th>
+      <th>Book Name</th>
+      <th>Loan Date</th>
+      <th>Return Date</th>
+      
+    </tr>
+    {% for loan in loans %}
+    <tr>
+      <td>{{ loan.member }}</td>
+      <td>{{ loan.book }}</td>
+      <td>{{ loan.loan_date }}</td>
+      <td>{{ loan.return_date }}</td>
+      <td><button class="btn btn-warning" data-toggle="modal" data-target="#formModal" onclick="initModal(book.title)">update</button></td>
+      
+      <td><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" onclick="(() => document.getElementById('docName').value = '{{ loan.name }}')()">delete</button></td>
+      
+    </tr>
+   
+    {% endfor %}
+  </table> 
+   
+</div>
   <!-- The form Modal -->
   <div id="formModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="formModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -83,7 +86,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="submitButton" onclick="create_loan()">Save</button>
+          <button type="button" class="btn btn-primary" id="submitButton" onclick="create_loan()" data-dismiss="modal">Save</button>
         </div>
       </div>
     </div>
