@@ -24,7 +24,7 @@
         <td>{{ book.author }}</td>
         <td>{{ book.publish_date }}</td>
         <td>{{ book.isbn }}</td>
-        <td><button class="btn btn-warning" data-toggle="modal" data-target="#formModal" onclick="initModal(book.title)">update</button></td>
+        <td><button class="btn btn-warning" data-toggle="modal" data-target="#formModal" onclick="initModal('{{ book.name }}')">update</button></td>
         
         <td><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" onclick="(() => document.getElementById('docName').value = '{{ book.name }}')()">delete</button></td>
         

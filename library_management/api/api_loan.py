@@ -147,7 +147,7 @@ def update_loan(loan_name, update_data):
     return doc.name
 
 @frappe.whitelist()
-def delete_loan(name):
+def delete_loan(loan_name):
     '''
     Delete a specific Loan.
 
@@ -160,4 +160,4 @@ def delete_loan(name):
     if frappe.session.user == 'Guest':
         frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
-    frappe.delete_doc('Loan', name)
+    frappe.delete_doc('Loan', loan_name)

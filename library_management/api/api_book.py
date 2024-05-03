@@ -136,32 +136,12 @@ def update_book(book_name, update_data):
     if frappe.session.user == 'Guest':
         frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
-    doc = frappe.get_doc('Book', book_name,for_update=True)
-    update_data = json.loads(update_data) if type(update_data) is str else update_data  # If update_data is string, convert to dict
+    doc = frappe.get_doc('Book', book_name)
+    update_data = json.loads(update_data) if type(update_data) is str else update_data # If update_data is string, convert to dict
+    doc.update(update_data)
+    doc.save()
+    return doc.name
 
-    # Update the document fields directly
-    for field, value in update_data.items():
-        doc.set(field, value)
-    if doc:
-      doc.save()
-      return doc.name
-    else:
-     frappe.throw(_("Book with name '{}' not found.".format(book_name)))
-     return doc.name
-# @frappe.whitelist()
-# def update_doc(doctype: str, name: str):
-# 	# data = frappe.form_dict
-
-# 	doc = frappe.get_doc(doctype, name, for_update=True)
-# 	data.pop("flags", None)
-# 	doc.update(data)
-# 	doc.save()
-
-# 	# check for child table doctype
-# 	if doc.get("parenttype"):
-# 		frappe.get_doc(doc.parenttype, doc.parent).save()
-
-# 	return doc
 @frappe.whitelist()
 def delete_book(book_name):
     '''
