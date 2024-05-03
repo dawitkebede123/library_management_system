@@ -17,4 +17,4 @@ def get_context(context):
     context.user = current_user  # Assuming you need user information
 
     # Return the updated context (optional)
-    return context
+    # return context

@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2024-05-02 03:52:30.677430",
+ "creation": "2024-05-02 10:48:23.084848",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -14,12 +14,12 @@
   {
    "fieldname": "member",
    "fieldtype": "Data",
-   "label": "Member"
+   "label": "member"
   },
   {
    "fieldname": "book",
    "fieldtype": "Data",
-   "label": "Book"
+   "label": "book"
   },
   {
    "fieldname": "loan_date",
@@ -34,7 +34,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-02 03:55:01.811470",
+ "modified": "2024-05-02 10:49:35.043965",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Loan",

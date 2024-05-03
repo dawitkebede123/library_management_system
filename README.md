@@ -33,7 +33,7 @@ Make sure *Bench* is installed on your machine. If you haven't installed Bench, 
 - Install this app on your newly created site
 
   ```bash
-  bench --site [site-name] install-app [app-name]
+  bench --site [site-name] install-app library_management
   ```
 
 - Add the site to hosts
@@ -41,7 +41,10 @@ Make sure *Bench* is installed on your machine. If you haven't installed Bench, 
   ```bash
   bench --site [site-name] add-to-hosts
   ```
-
+- make developert mode on 
+   ```bash
+  bench set-config -g developer mode true
+  ``` 
 - Start the development server
   
   ```bash
