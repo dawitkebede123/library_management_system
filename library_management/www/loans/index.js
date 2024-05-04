@@ -9,7 +9,7 @@ function initModal(docName='') {
       },
       callback: function(response) {
         if (response.message) {
-          const book = response.message;
+          const loan = response.message;
           document.getElementById("formModalLabel").innerText = "Update Loan";
           const submitButton = document.getElementById("submitButton");
           submitButton.innerText = "Update Loan";

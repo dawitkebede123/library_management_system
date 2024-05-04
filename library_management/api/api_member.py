@@ -56,7 +56,7 @@ def create_member(member_data):
   # Create the member document with allowed attributes
   new_doc = frappe.get_doc({
       "doctype": "Member",
-      "member_name": member_data.get("name"),
+      "member_name": member_data.get("member_name"),
       "membership_id": member_data.get("membership_id"),
       "email": member_data.get("email"),
       "phone_number": member_data.get("phone_number"),
